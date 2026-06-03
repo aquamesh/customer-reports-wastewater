@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AquaMesh - Wastewater Utility Brief</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Instrument+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0c1d26;
+    --ink-2: #143341;
+    --blue: #0ea5d0;
+    --blue-2: #1a6e8a;
+    --green: #2f9f78;
+    --mist: #e8f7fc;
+    --soft: #f6fbfd;
+    --rule: #cfebf3;
+    --muted: #587987;
+    --paper: #ffffff;
+    --bg: #f8fbfc;
+  }
+
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    font-family: "Instrument Sans", sans-serif;
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--ink);
+    background: var(--bg);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  .cover {
+    background:
+      linear-gradient(145deg, rgba(14, 165, 208, .12), transparent 38%),
+      linear-gradient(180deg, #0c1d26 0%, #112c39 100%);
+    color: #fff;
+    padding: 64px 72px 56px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cover::after {
+    content: "";
+    position: absolute;
+    inset: auto -110px -160px auto;
+    width: 420px;
+    height: 420px;
+    border: 1px solid rgba(14, 165, 208, .2);
+    border-radius: 50%;
+  }
+
+  .cover-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(300px, .9fr);
+    gap: 48px;
+    align-items: end;
+    position: relative;
+    z-index: 1;
+  }
+
+  .wordmark-logo {
+    display: block;
+    width: min(100%, 420px);
+    height: auto;
+    margin-bottom: 36px;
+  }
+
+  .cover h1 {
+    font-family: "Instrument Serif", Georgia, serif;
+    font-size: 54px;
+    font-weight: 400;
+    line-height: 1;
+    max-width: 640px;
+    margin: 0 0 18px;
+  }
+
+  .cover-sub {
+    max-width: 620px;
+    margin: 0;
+    color: rgba(255, 255, 255, .68);
+    font-size: 17px;
+  }
+
+  .cover-panel {
+    border: 1px solid rgba(208, 235, 243, .18);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, .045);
+    padding: 22px;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .08);
+  }
+
+  .panel-label {
+    color: rgba(255, 255, 255, .44);
+    font-size: 10px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .panel-line {
+    display: grid;
+    grid-template-columns: 74px 1fr;
+    gap: 14px;
+    padding: 12px 0;
+    border-top: 1px solid rgba(255, 255, 255, .08);
+  }
+
+  .panel-line:first-of-type {
+    border-top: none;
+    padding-top: 0;
+  }
+
+  .panel-line strong {
+    color: #dff8ff;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .panel-line span {
+    color: rgba(255, 255, 255, .72);
+    font-size: 13px;
+  }
+
+  .page {
+    max-width: 1020px;
+    margin: 0 auto;
+    padding: 0 56px 72px;
+  }
+
+  .impact-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin-top: 48px;
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--paper);
+  }
+
+  .impact {
+    padding: 24px 22px;
+    border-right: 1px solid var(--rule);
+  }
+
+  .impact:last-child {
+    border-right: none;
+  }
+
+  .impact-value {
+    font-family: "Instrument Serif", Georgia, serif;
+    font-size: 44px;
+    line-height: .95;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+
+  .impact-value.green,
+  .buyer-stat.green {
+    color: var(--green);
+  }
+
+  .impact-label {
+    color: var(--blue);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .impact-copy {
+    margin: 0;
+    color: var(--muted);
+    font-size: 12px;
+  }
+
+  .note {
+    max-width: 760px;
+    color: var(--muted);
+    font-size: 12px;
+    margin: 14px 0 0;
+  }
+
+  .section {
+    margin-top: 72px;
+  }
+
+  .section-kicker {
+    color: var(--blue);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  h2 {
+    font-family: "Instrument Serif", Georgia, serif;
+    font-size: 34px;
+    font-weight: 400;
+    line-height: 1.12;
+    margin: 0 0 16px;
+  }
+
+  .lead {
+    max-width: 780px;
+    margin: 0;
+    color: #2b5060;
+    font-size: 16px;
+  }
+
+  .callout {
+    border-left: 3px solid var(--blue);
+    background: var(--mist);
+    border-radius: 0 8px 8px 0;
+    padding: 20px 22px;
+    color: var(--ink-2);
+    font-size: 15px;
+  }
+
+  .callout strong {
+    color: var(--blue-2);
+  }
+
+  .platform-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    margin-top: 26px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .platform-card {
+    background: var(--paper);
+    padding: 22px;
+  }
+
+  .product-image {
+    height: 220px;
+    margin: 0 0 18px;
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 16px;
+  }
+
+  .product-image.tall img {
+    padding: 10px 34px;
+  }
+
+  .product-image.wide img {
+    padding: 18px 10px;
+  }
+
+  .platform-card h3 {
+    font-family: "Instrument Serif", Georgia, serif;
+    font-size: 27px;
+    font-weight: 400;
+    line-height: 1.05;
+    margin: 0 0 8px;
+    color: var(--ink);
+  }
+
+  .platform-card p {
+    color: #2b5060;
+    font-size: 13.5px;
+  }
+
+  .platform-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 16px 0 0;
+  }
+
+  .platform-card li {
+    position: relative;
+    padding: 8px 0 8px 14px;
+    border-top: 1px solid var(--rule);
+    color: #2b5060;
+    font-size: 13px;
+  }
+
+  .platform-card li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 17px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--blue);
+  }
+
+  .case-study {
+    margin-top: 26px;
+    background: linear-gradient(180deg, #ffffff, #f8fcfd);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .case-hero {
+    position: relative;
+    height: 260px;
+    background: #fff;
+    overflow: hidden;
+  }
+
+  .case-hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .case-intro {
+    padding: 24px;
+    border-bottom: 1px solid var(--rule);
+    background: var(--mist);
+  }
+
+  .case-intro p {
+    max-width: 840px;
+    margin: 0;
+    color: #2b5060;
+  }
+
+  .deployment-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--rule);
+  }
+
+  .deployment-card {
+    background: var(--paper);
+    border: 0;
+    border-radius: 0;
+    padding: 22px;
+  }
+
+  .deployment-card.full {
+    grid-column: 1 / -1;
+  }
+
+  .deployment-card h3 {
+    margin: 0 0 8px;
+    color: var(--ink);
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  .deployment-card p {
+    margin: 0;
+    color: #2b5060;
+    font-size: 13px;
+  }
+
+  .deployment-card ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .deployment-card li {
+    position: relative;
+    padding: 7px 0 7px 16px;
+    color: #2b5060;
+    font-size: 13px;
+    border-top: 1px solid var(--rule);
+  }
+
+  .deployment-card li:first-child {
+    border-top: none;
+    padding-top: 0;
+  }
+
+  .deployment-card li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 15px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--green);
+  }
+
+  .value-list {
+    background: var(--ink);
+    color: #fff;
+    padding: 24px;
+  }
+
+  .value-list h3 {
+    margin: 0 0 14px;
+    font-family: "Instrument Serif", Georgia, serif;
+    font-size: 27px;
+    font-weight: 400;
+  }
+
+  .value-list ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .value-list li {
+    position: relative;
+    padding-left: 18px;
+    color: rgba(255, 255, 255, .72);
+    font-size: 13px;
+  }
+
+  .value-list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--blue);
+  }
+
+  .use-table {
+    width: 100%;
+    margin-top: 26px;
+    border-collapse: collapse;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    overflow: hidden;
+    display: table;
+  }
+
+  .use-table th {
+    text-align: left;
+    color: var(--muted);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    padding: 13px 16px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .use-table td {
+    color: #2b5060;
+    font-size: 13px;
+    padding: 13px 16px;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+  }
+
+  .use-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  .use-table strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  .footer {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 20px;
+    align-items: center;
+    margin-top: 56px;
+    background: var(--ink);
+    border-radius: 8px;
+    padding: 26px 30px;
+    color: #fff;
+    font-size: 14px;
+  }
+
+  .footer span {
+    color: var(--blue);
+    font-weight: 600;
+  }
+
+  .footer-logo {
+    width: 220px;
+    height: auto;
+    display: block;
+  }
+
+  .footer span:last-child {
+    text-align: right;
+  }
+
+  @media (max-width: 960px) {
+    .cover {
+      padding: 48px 34px;
+    }
+
+    .cover-inner {
+      grid-template-columns: 1fr;
+    }
+
+    .page {
+      padding: 0 34px 56px;
+    }
+
+    .impact-grid,
+    .platform-grid,
+    .deployment-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .impact:nth-child(2) {
+      border-right: none;
+    }
+
+    .impact:nth-child(-n + 2) {
+      border-bottom: 1px solid var(--rule);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .cover h1 {
+      font-size: 38px;
+    }
+
+    .cover-sub {
+      font-size: 15px;
+    }
+
+    .cover-panel {
+      padding: 18px;
+    }
+
+    .panel-line {
+      grid-template-columns: 1fr;
+      gap: 3px;
+    }
+
+    .impact-grid,
+    .platform-grid,
+    .deployment-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .impact {
+      border-right: none;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .impact:last-child {
+      border-bottom: none;
+    }
+
+    .use-table,
+    .use-table thead,
+    .use-table tbody,
+    .use-table tr,
+    .use-table th,
+    .use-table td {
+      display: block;
+    }
+
+    .use-table thead {
+      display: none;
+    }
+
+    .use-table tr {
+      border-bottom: 1px solid var(--rule);
+      padding: 10px 0;
+    }
+
+    .use-table tr:last-child {
+      border-bottom: none;
+    }
+
+    .use-table td {
+      border-bottom: none;
+      padding: 5px 16px;
+    }
+
+    .footer {
+      grid-template-columns: 1fr;
+      justify-items: center;
+      text-align: center;
+    }
+
+    .footer span:last-child {
+      text-align: center;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="cover">
+  <div class="cover-inner">
+    <div>
+      <img class="wordmark-logo" src="./aquameshlogo-removebg-preview.png" alt="AquaMesh">
+      <h1>More monitoring coverage without more field burden.</h1>
+      <p class="cover-sub">AquaMesh helps wastewater utilities catch water-quality problems earlier, monitor harder-to-reach sites, and build stronger compliance documentation without scaling labor, telemetry, or instrument cost site by site.</p>
+    </div>
+    <div class="cover-panel" aria-label="Positioning summary">
+      <div class="panel-label">Buyer promise</div>
+      <div class="panel-line"><strong>See more</strong><span>Continuous screening across plants, lift stations, outfalls, industrial discharge points, and receiving waters.</span></div>
+      <div class="panel-line"><strong>Visit less</strong><span>Self-cleaning probes, remote device status, and over-the-air updates reduce routine field work.</span></div>
+      <div class="panel-line"><strong>Act sooner</strong><span>Trend visibility and alerts help teams respond before issues become compliance events.</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="page">
+  <div class="impact-grid" aria-label="Modeled customer impact">
+    <div class="impact">
+      <div class="impact-value green">Real-time</div>
+      <div class="impact-label">Detection</div>
+      <p class="impact-copy">Continuous screening helps identify abnormal water-quality conditions as they develop.</p>
+    </div>
+    <div class="impact">
+      <div class="impact-value">50%</div>
+      <div class="impact-label">Fewer blind spots</div>
+      <p class="impact-copy">Modeled visibility gain across priority overflow and discharge points.</p>
+    </div>
+    <div class="impact">
+      <div class="impact-value">40%</div>
+      <div class="impact-label">Fewer field visits</div>
+      <p class="impact-copy">Modeled reduction in routine site visits at deployed monitoring points.</p>
+    </div>
+    <div class="impact">
+      <div class="impact-value">60%</div>
+      <div class="impact-label">Lower hardware cost</div>
+      <p class="impact-copy">Modeled upfront savings versus separate multi-sensor packages.</p>
+    </div>
+  </div>
+  <p class="note">Modeled targets are based on typical utility workflows and current AquaMesh hardware pricing. Actual results depend on deployment design, current monitoring practices, labor rates, and site conditions.</p>
+
+  <div class="section">
+    <div class="section-kicker">Platform fit</div>
+    <h2>One field-ready stack for distributed wastewater monitoring</h2>
+    <p class="lead">AquaMesh is easiest to sell when the hardware story supports the operating story: more sites watched, fewer visits required, and clearer evidence when conditions change.</p>
+    <div class="platform-grid">
+      <div class="platform-card">
+        <div class="product-image tall">
+          <img src="./product-images/aquaspectra.png" alt="AquaSpectra optical probe">
+        </div>
+        <h3>AquaSpectra™</h3>
+        <p>Multi-parameter optical screening in a compact device built for practical field deployment.</p>
+        <ul>
+          <li>16+ optical parameters in one device</li>
+          <li>Turbidity, organics, nutrients, and algae indicators</li>
+          <li>Self-cleaning options to reduce fouling burden</li>
+          <li>RS-485 integration and onboard storage</li>
+        </ul>
+      </div>
+      <div class="platform-card">
+        <div class="product-image">
+          <img src="./product-images/aqualink.png" alt="AquaLink communications hub">
+        </div>
+        <h3>AquaLink™</h3>
+        <p>Coverage for hard-to-wire assets where full infrastructure is expensive or impractical.</p>
+        <ul>
+          <li>Remote and distributed site coverage</li>
+          <li>Mesh networking with flexible uplink options</li>
+          <li>SCADA integration for in-facility monitoring and controls workflows</li>
+          <li>Works across lift stations, outfalls, and storm interfaces</li>
+          <li>Reduces one-telemetry-path-per-sensor dependence</li>
+        </ul>
+      </div>
+      <div class="platform-card">
+        <div class="product-image wide">
+          <img src="./product-images/aquaview.png" alt="AquaView cloud dashboard">
+        </div>
+        <h3>AquaView™</h3>
+        <p>Trend visibility and device status in one place so teams can act sooner and document better.</p>
+        <ul>
+          <li>Threshold alerts and anomaly detection</li>
+          <li>Dashboard views across priority assets</li>
+          <li>Device health and OTA update support</li>
+          <li>Event reconstruction and compliance documentation</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-kicker">Example Case Study</div>
+    <h2>High Load Wastewater Monitoring</h2>
+    <div class="case-study">
+      <div class="case-hero">
+        <img src="./product-images/wastewater-treatment-facility.jpg" alt="Wastewater treatment facility">
+      </div>
+      <div class="case-intro">
+        <p>At a representative discharge site, the operator's main problem was delayed visibility: grab samples could miss short spikes, fixed sensors could struggle with turbidity and color interference, and fouling created uncertainty around data quality. For this type of site, AquaMesh is configured before installation around the expected pollution load, calibration scale, adjustable optical path length, maintenance access, power availability, and communications needs.</p>
+      </div>
+      <div class="deployment-grid">
+        <div class="deployment-card full">
+          <h3>Deployment approach</h3>
+          <ul>
+            <li>Configured for continuous wastewater monitoring.</li>
+            <li>Uses absorbance, fluorescence, turbidity, temperature, and camera-based site inspection.</li>
+            <li>Supports organic load, nitrate-related absorbance, contamination fluorescence, turbidity, and oil or hydrocarbon indicators.</li>
+            <li>Includes tunable compensation for temperature, ambient light, turbidity, and inner filter effects.</li>
+          </ul>
+        </div>
+        <div class="deployment-card">
+          <h3>Heavy pollution configuration</h3>
+          <ul>
+            <li>Adjustable optical path length helps keep signals inside the usable measurement window.</li>
+            <li>Internal scale calibration is set around the operator's target concentration range.</li>
+            <li>Configuration reduces saturation risk in heavily polluted water.</li>
+            <li>Preserves useful resolution for operational decision-making.</li>
+          </ul>
+        </div>
+        <div class="deployment-card">
+          <h3>Operation</h3>
+          <ul>
+            <li>Supports continuous, scheduled, or event-triggered monitoring.</li>
+            <li>High-risk discharge points can prioritize frequent readings and rapid alerts.</li>
+            <li>Configured indicators can include turbidity, organic load, and fluorescence patterns.</li>
+            <li>Lower-risk remote sites can reduce sampling frequency to extend autonomy.</li>
+          </ul>
+        </div>
+        <div class="deployment-card">
+          <h3>Maintenance plan</h3>
+          <ul>
+            <li>Assumes fouling pressure from solids, grease, biofilm, algae, and variable flow.</li>
+            <li>Self-cleaning wiper, UV antifouling LEDs, and antifoul coating can reduce avoidable visits.</li>
+            <li>Onboard camera inspection helps verify when cleaning is actually needed.</li>
+            <li>Maintenance shifts from fixed visits toward condition-informed service.</li>
+          </ul>
+        </div>
+        <div class="deployment-card">
+          <h3>Autonomy and power</h3>
+          <ul>
+            <li>Mesh networking supports distributed wastewater monitoring.</li>
+            <li>Local storage and gateway upload support remote infrastructure.</li>
+            <li>Battery backup and solar-capable deployment support sites without reliable power.</li>
+            <li>Integrates with third-party pH, TSS, DO, and flow sensors.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="value-list">
+        <h3>Resulting value</h3>
+        <ul>
+          <li>5x broader site coverage at the same equipment budget.</li>
+          <li>Minutes instead of days for networked monitoring setup.</li>
+          <li>Continuous monitoring instead of periodic grab samples.</li>
+          <li>Fewer separate instruments per location.</li>
+          <li>Lower maintenance uncertainty through camera inspection and condition-informed service.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-kicker">Use cases</div>
+    <h2>Where AquaMesh creates the clearest value</h2>
+    <table class="use-table">
+      <thead>
+        <tr>
+          <th>Problem</th>
+          <th>AquaMesh angle</th>
+          <th>Buyer value</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Influent spikes</strong></td>
+          <td>Track turbidity, organic load proxies, nitrate, and fluorescence signatures.</td>
+          <td>Earlier process awareness and better control decisions.</td>
+        </tr>
+        <tr>
+          <td><strong>Industrial discharge</strong></td>
+          <td>Detect abnormal optical fingerprints and organic load changes.</td>
+          <td>Faster source investigation and stronger documentation.</td>
+        </tr>
+        <tr>
+          <td><strong>Collection hotspots</strong></td>
+          <td>Use low-power mesh coverage at remote or hard-to-wire points.</td>
+          <td>Visibility without full fixed instrumentation at every site.</td>
+        </tr>
+        <tr>
+          <td><strong>CSO and SSO response</strong></td>
+          <td>Monitor near overflow points and receiving waters.</td>
+          <td>Faster response and clearer event records.</td>
+        </tr>
+        <tr>
+          <td><strong>Capital planning</strong></td>
+          <td>Generate denser field data across priority assets.</td>
+          <td>Better evidence for upgrades and prioritization.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="footer">
+    <span>sales@aquamesh.ai</span>
+    <img class="footer-logo" src="./aquameshlogo-removebg-preview.png" alt="AquaMesh">
+    <span>www.aquamesh.ai</span>
+  </div>
+</div>
+</body>
+</html>
